@@ -9,7 +9,7 @@ note_id = 1
 CATEGORIES = [
     {
         "id": category_id,
-        "name": "Medicine"
+        "title": "Medicine"
     }
 ]
 
@@ -35,13 +35,13 @@ NOTES = [
 def create_user():
     request_data = {}
     global user_id
-    request_data["id"] = user_id + 1
+    user_id += 1
+    request_data["id"] = user_id
     try:
         request_data["name"] = request.get_json()["name"]
     except:
         request_data["name"] = "User" + str(user_id)
     USERS.append(request_data)
-    print(USERS)
     return request_data
 
 
@@ -50,6 +50,24 @@ def get_user():
     return jsonify({"users": USERS})
 
 
+@app.route("/category", methods=["POST"])
+def create_category():
+    request_data = {}
+    global category_id
+    category_id += 1
+    request_data["id"] = category_id
+    try:
+        request_data["title"] = request.get_json()["title"]
+    except:
+        request_data["title"] = "Title" + str(category_id)
+
+    CATEGORIES.append(request_data)
+    return request_data
+
+
+
 @app.route("/categories")
 def get_categories():
     return jsonify({"categories": CATEGORIES})
+
+
