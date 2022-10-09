@@ -105,13 +105,30 @@ def get_notes():
 
 @app.route("/user-notes", methods=["POST"])
 def get_user_notes():
-    request_data = request.get_json()
     try:
+        request_data = request.get_json()
         id_user = request_data["user"]
+        user_notes = []
+        for i in NOTES:
+            if i["user_id"] == id_user:
+                user_notes.append(i)
+        return jsonify(user_notes)
     except:
         return "Error bad request"
-    user_notes = []
-    for i in NOTES:
-        if i["user_id"] == id_user:
-            user_notes.append(i)
-    return jsonify(user_notes)
+
+
+
+@app.route("/user-category-notes", methods=["POST"])
+def get_user_category_notes():
+    try:
+        request_data = request.get_json()
+        id_user = request_data["user"]
+        id_category = request_data["category"]
+        user_notes = []
+        for i in NOTES:
+            if i["user_id"] == id_user and i["category_id"] == id_category:
+                user_notes.append(i)
+        return jsonify(user_notes)
+    except:
+        return "Error bad request"
+
