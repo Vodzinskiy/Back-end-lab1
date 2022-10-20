@@ -1,4 +1,4 @@
-FROM python:3.10.7
+FROM python:3.10.7-slim
 
 ENV FLASK_APP=main
 
@@ -10,4 +10,4 @@ COPY main /opt/main
 
 WORKDIR /opt
 
-CMD flask run --host 0.0.0.0 -p $5000
+CMD flask run --host 0.0.0.0 -p $PORT
