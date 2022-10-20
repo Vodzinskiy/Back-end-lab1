@@ -38,6 +38,7 @@ def validation(key, value, arr):
     return False
 
 
+
 @app.route("/user", methods=["POST"])
 def create_user():
     request_data = {}
@@ -87,6 +88,10 @@ def create_note():
     NOTES.append(request_data)
     return request_data
 
+
+@app.route("/")
+def get_user():
+    return "Lab1 IO-04 Vodzinskiy Roman"
 
 @app.route("/users")
 def get_user():
