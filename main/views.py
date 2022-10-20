@@ -90,7 +90,7 @@ def create_note():
 
 
 @app.route("/")
-def get_user():
+def home():
     return "Lab1 IO-04 Vodzinskiy Roman"
 
 @app.route("/users")
