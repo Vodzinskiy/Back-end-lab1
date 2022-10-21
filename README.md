@@ -8,8 +8,8 @@ __Виконав:__ студент групи ІО-04 Водзінський Р�
 
 __Python:__
 
-1. - windows: set FLASK_APP=python_backend; 
-   - linux: export FLASK_APP=python_backend
+1. - windows: set FLASK_APP=main; 
+   - linux: export FLASK_APP=main
 2. flask run
 
 __Docker:__
@@ -18,5 +18,5 @@ __Docker:__
 
 2. docker-compose build
 
-3. docker-compose -up
+3. docker-compose up
 
