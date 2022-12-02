@@ -1,4 +1,4 @@
-from main import app
+from main import app, db
 from flask import jsonify, request
 import datetime
 
@@ -6,30 +6,9 @@ user_id = 1
 category_id = 1
 note_id = 1
 
-CATEGORIES = [
-    {
-        "id": category_id,
-        "title": "Medicine"
-    }
-]
-
-USERS = [
-    {
-        "id": user_id,
-        "name": "Roma",
-    }
-]
-
-NOTES = [
-    {
-        "id": note_id,
-        "user_id": user_id,
-        "category_id": category_id,
-        "price": 100,
-        "date_of_creating": datetime.datetime.now()
-    }
-]
-
+CATEGORIES = db.CATEGORIES
+USERS = db.USERS
+NOTES = db.NOTES
 
 def validation(key, value, arr):
     for i in arr:
