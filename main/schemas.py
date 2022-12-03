@@ -16,3 +16,8 @@ class NoteSchema(Schema):
     user_id = fields.Str(required=True)
     category_id = fields.Str(required=True)
     price = fields.Float(required=True)
+
+
+class NoteQuerySchema(Schema):
+    user_id = fields.Int(required=True)
+    category_id = fields.Int()

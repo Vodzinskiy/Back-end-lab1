@@ -1,21 +1,24 @@
-from flask import MethodView
+from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from flask import request, jsonify
 
 from main.db import USERS
+from main.schemas import UserSchema
 
 blp = Blueprint("currency", __name__, description="user operation")
 
+userId = 1
 
 @blp.route("/user/<int:user_id>")
 class User(MethodView):
+    @blp.response(200, UserSchema)
     def get(self, user_id):
         try:
             return USERS[user_id]
         except KeyError:
             abort(404, message="User not found")
 
-
+    @blp.response(200, UserSchema)
     def delete(self, user_id):
         try:
             deleted_user = user_id
@@ -27,18 +30,14 @@ class User(MethodView):
 
 @blp.route("/user")
 class UserList(MethodView):
+    @blp.response(200, UserSchema(many=True))
     def get(self):
-        return USERS
+        return list(USERS.values())
 
-    def post(self):
-        request_data = {}
+    @blp.arguments(UserSchema)
+    @blp.response(200, UserSchema)
+    def post(self, request_data):
         global userId
-        try:
-            userId += 1
-            request_data["id"] = userId
-            request_data["name"] = request.get_json()["name"]
-        except:
-            return "Error bad request"
-        USERS[userId] = request_data
-        return jsonify(request_data)
-
+        userId += 1
+        USERS[userId] = {"id": userId, "name": request_data["name"]}
+        return jsonify(USERS[userId])
