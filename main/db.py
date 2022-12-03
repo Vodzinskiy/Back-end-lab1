@@ -4,21 +4,24 @@ user_id = 1
 category_id = 1
 note_id = 1
 
-CATEGORIES = [
+CATEGORIES = {
+    category_id:
     {
         "id": category_id,
         "title": "Medicine"
     }
-]
+}
 
-USERS = [
+USERS = {
+    user_id:
     {
         "id": user_id,
         "name": "Roma",
     }
-]
+}
 
-NOTES = [
+NOTES = {
+    note_id:
     {
         "id": note_id,
         "user_id": user_id,
@@ -26,7 +29,7 @@ NOTES = [
         "price": 100,
         "date_of_creating": datetime.datetime.now()
     }
-]
+}
 
 from flask_sqlalchemy import SQLAlchemy
 

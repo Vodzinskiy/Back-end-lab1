@@ -1,11 +1,11 @@
+from flask import jsonify
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
-from flask import request, jsonify
 
 from main.db import USERS
 from main.schemas import UserSchema
 
-blp = Blueprint("currency", __name__, description="user operation")
+blp = Blueprint("user", __name__, description="user operation")
 
 userId = 1
 
