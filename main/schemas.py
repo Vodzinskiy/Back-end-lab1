@@ -21,3 +21,8 @@ class NoteSchema(Schema):
     user_id = fields.Int(required=True)
     category_id = fields.Int(required=True)
     price = fields.Float(required=True)
+
+
+class CurrencySchema(Schema):
+    id = fields.Int(dump_only=True)
+    title = fields.Str(required=True)
