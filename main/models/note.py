@@ -19,12 +19,8 @@ class NoteModel(db.Model):
         unique=False,
         nullable=False
     )
-    currency_id = db.Column(
-        db.Integer,
-        db.ForeignKey("currency.id"),
-        unique=False,
-        nullable=False
-    )
+    currency_title = db.Column(db.String(128), db.ForeignKey("currency.id"), unique=False)
+
     date_of_creating = db.Column(db.TIMESTAMP, server_default=func.now())
     price = db.Column(db.Float(precision=2), unique=False, nullable=False)
     user = db.relationship("UserModel", back_populates="note")

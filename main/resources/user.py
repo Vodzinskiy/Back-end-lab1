@@ -1,9 +1,11 @@
 from sqlalchemy.exc import IntegrityError
 from flask.views import MethodView
-from flask_smorest import Blueprint, abort
+from flask_smorest import Blueprint
+from flask import abort
 from sqlalchemy.orm.exc import UnmappedInstanceError
 
 from main.db import db
+from main.models import CurrencyModel
 from main.schemas import UserSchema
 from main.models.user import UserModel
 
@@ -36,6 +38,8 @@ class UserList(MethodView):
     @blp.arguments(UserSchema)
     @blp.response(200, UserSchema)
     def post(self, request_data):
+        if not (bool(CurrencyModel.query.filter_by(title=request_data["currency"]).first())):
+            abort(code=404, description="Currency not found")
         user = UserModel(**request_data)
         try:
             db.session.add(user)

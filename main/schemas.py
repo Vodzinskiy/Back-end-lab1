@@ -4,6 +4,7 @@ from marshmallow import Schema, fields
 class UserSchema(Schema):
     id = fields.Int(dump_only=True)
     name = fields.Str(required=True)
+    currency = fields.Str(required=False, missing="UAH")
 
 
 class CategorySchema(Schema):
@@ -21,6 +22,7 @@ class NoteSchema(Schema):
     user_id = fields.Int(required=True)
     category_id = fields.Int(required=True)
     price = fields.Float(required=True)
+    currency_title = fields.Str(required=False, missing=None)
 
 
 class CurrencySchema(Schema):

@@ -4,7 +4,7 @@ from sqlalchemy.orm.exc import UnmappedInstanceError
 
 from main.db import db
 from sqlalchemy.exc import IntegrityError
-from main.models import NoteModel
+from main.models import NoteModel, UserModel
 
 from main.schemas import NoteSchema, NoteQuerySchema
 
@@ -35,7 +35,6 @@ class NoteList(MethodView):
     def get(self, **kwargs):
         try:
             user_id = int(kwargs.get("user_id"))
-            print(user_id)
             query = NoteModel.query.filter(user_id == user_id)
             try:
                 category_id = int(kwargs.get("category_id"))
@@ -49,10 +48,10 @@ class NoteList(MethodView):
     @blp.arguments(NoteSchema)
     @blp.response(200, NoteSchema)
     def post(self, request_data):
-        try:
-            request_data["currency_id"]
-        except KeyError:
-            request_data["currency_id"] = 1
+
+        if request_data["currency_title"] is None:
+            request_data["currency_title"] = UserModel.query.filter_by(id=request_data["user_id"]).first().currency
+
         note = NoteModel(**request_data)
         try:
             db.session.add(note)
