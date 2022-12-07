@@ -1,8 +1,8 @@
-# Back-end Lab1
+# Back-end Lab2
 
 __Виконав:__ студент групи ІО-04 Водзінський Роман
 
-[Huroku](https://lab1-io-04-vodzinskiy.herokuapp.com/)
+[Huroku](https://back-end-lab2.herokuapp.com//)
 
 Для запуску проекту локально потрібно мати Docker aбо Python
 
